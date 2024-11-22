@@ -1,24 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image Transformation</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Image Transformation</h1>
     <form action="/" method="post" enctype="multipart/form-data">
-        <label>Upload Image:</label>
-        <input type="file" name="image" accept="image/*" required><br><br>
-        
-        <label>Choose Transformation:</label><br>
-        <input type="radio" name="transform" value="reflect_horizontal" required> Reflect Horizontal<br>
-        <input type="radio" name="transform" value="reflect_vertical"> Reflect Vertical<br>
-        <input type="radio" name="transform" value="rotate"> Rotate (Angle: <input type="number" name="angle" step="1" value="45">)<br>
-        <input type="radio" name="transform" value="dilate"> Dilate (Scale X: <input type="number" name="scale_x" step="0.1" value="1.5">, Scale Y: <input type="number" name="scale_y" step="0.1" value="1.5">)<br>
-        <input type="radio" name="transform" value="project"> Project<br><br>
-        
-        <button type="submit">Apply Transformation</button>
+      <label>Upload Image:</label>
+      <input type="file" name="image" accept="image/*" required /><br /><br />
+
+      <label>Choose Transformation:</label><br />
+      <input
+        type="radio"
+        name="transform"
+        value="reflect_horizontal"
+        required
+      />
+      Reflect Horizontal<br />
+      <input type="radio" name="transform" value="reflect_vertical" /> Reflect
+      Vertical<br />
+      <input type="radio" name="transform" value="rotate" /> Rotate (Angle:
+      <input type="number" name="angle" step="1" value="45" />)<br />
+      <input type="radio" name="transform" value="dilate" /> Dilate (Scale X:
+      <input type="number" name="scale_x" step="0.1" value="1.5" />, Scale Y:
+      <input type="number" name="scale_y" step="0.1" value="1.5" />)<br />
+      <input type="radio" name="transform" value="translate" /> translasi (geser
+      X: <input type="number" name="tx" value="2" />, Geser Y:
+      <input type="number" name="ty" value="2" />)<br />
+      <br /><br />
+
+      <button type="submit">Apply Transformation</button>
     </form>
-</body>
+  </body>
 </html>
