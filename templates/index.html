@@ -1,37 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Image Transformation</title>
-  </head>
-  <body>
-    <h1>Image Transformation</h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+  <title>Image Transformation</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+  <nav class="navbar">
+    <div class="container">
+      <h1 class="logo">Image Transformation</h1>
+        <div class="burger-menu" onclick="toggleMenu()">
+          <i class="fi fi-rr-menu-burger"></i>
+        </div>
+      <ul class="nav-links">
+        <li><a href="#rotate" class="rotasi-nav"><i class="fi fi-rr-rotate-right"></i> Rotasi</a></li>
+        <li><a href="#translasi.html"><i class="fi fi-rr-compress-alt"></i> Translasi</a></li>
+        <li><a href="#dilate"><i class="fi fi-rr-arrow-up-right-and-arrow-down-left-from-center"></i> Dilatasi</a></li>
+        <li><a href="#reflect"><i class="fi fi-rr-reflect-horizontal-alt"></i> Refleksi</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+  <!-- Main Content -->
+  <div class="container main-content">
     <form action="/" method="post" enctype="multipart/form-data">
-      <label>Upload Image:</label>
-      <input type="file" name="image" accept="image/*" required /><br /><br />
+      <!-- Upload Image Section -->
+      <div class="upload-section">
+        <div class="upload-mark"><i class="fi fi-rr-upload"></i></div> 
+        <label for="image-upload">
+          Klik untuk Unggah Gambar<br />
+          Format Gambar: JPG dan PNG
+        </label>
+        <input type="file" id="image-upload" name="image" accept="image/*" required />
+      </div>
 
-      <label>Choose Transformation:</label><br />
-      <input
-        type="radio"
-        name="transform"
-        value="reflect_horizontal"
-        required
-      />
-      Reflect Horizontal<br />
-      <input type="radio" name="transform" value="reflect_vertical" /> Reflect
-      Vertical<br />
-      <input type="radio" name="transform" value="rotate" /> Rotate (Angle:
-      <input type="number" name="angle" step="1" value="45" />)<br />
-      <input type="radio" name="transform" value="dilate" /> Dilate (Scale X:
-      <input type="number" name="scale_x" step="0.1" value="1.5" />, Scale Y:
-      <input type="number" name="scale_y" step="0.1" value="1.5" />)<br />
-      <input type="radio" name="transform" value="translate" /> translasi (geser
-      X: <input type="number" name="tx" value="2" />, Geser Y:
-      <input type="number" name="ty" value="2" />)<br />
-      <br /><br />
+      <!-- Rotasi -->
+      <section id="rotate">
+        <h3>Rotasi Gambar</h3>
+        <input type="range" name="angle" min="-90" max="90" value="0"/>
+        <div class="rotation-buttons">
+          <button type="button" value="-90">-90°</button>
+          <button type="button" value="0">0°</button>
+          <button type="button" value="+90">+90°</button>
+        </div>
+      </section>
 
-      <button type="submit">Apply Transformation</button>
+      <!-- Submit Section -->
+      <div class="submit-section">
+        <button type="submit">Download Hasil Gambar</button>
+        <button type="reset">Reset</button>
+      </div>
     </form>
-  </body>
+  </div>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+      <form action="/" method="post" enctype="multipart/form-data">
+        <!-- Upload Image Section -->
+        <div class="upload-section">
+          <div class="upload-mark"><i class="fi fi-rr-upload"></i></div>
+          <label for="image-upload">
+            Klik untuk Unggah Gambar<br />
+            Format Gambar: JPG dan PNG
+          </label>
+          <input type="file" id="image-upload" name="image" accept="image/*" required />
+        </div>
+  
+        <!-- Translasi -->
+        <section id="translate">
+          <h3>Translasi Gambar</h3>
+          <div class="translasi-container">
+          <label for="tx">Geser Horizontal (X):</label>
+          <input type="number" name="tx" id="tx" value="50" />
+          <label for="ty">Geser Vertikal (Y):</label>
+          <input type="number" name="ty" id="ty" value="50" />
+          <input type="hidden" name="transform" value="translate" />
+          <div>
+        </section>
+  
+        <!-- Submit Section -->
+        <div class="submit-section">
+          <button type="submit">Download Hasil Gambar</button>
+          <button type="reset">Reset</button>
+        </div>
+      </form>
+    </div>
+    <script>
+      function toggleMenu() {
+        const navLinks = document.querySelector('.nav-links');
+        navLinks.classList.toggle('active');
+      }
+    </script>
+</body>
 </html>
