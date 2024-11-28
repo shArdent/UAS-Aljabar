@@ -6,8 +6,11 @@
 }
 
 body {
-  padding: 2rem;
   background-color: #f8f9fa;
+}
+
+main {
+  padding: 0 50px;
 }
 
 .header {
@@ -15,6 +18,8 @@ body {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 3rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
 }
 
 .title {
