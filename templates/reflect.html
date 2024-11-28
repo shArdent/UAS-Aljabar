@@ -14,7 +14,7 @@
     <header class="header">
       <h1 class="title">Image Transformation</h1>
       <div class="nav-buttons">
-        <a href="{{ url_for('index') }}" class="nav-button active">
+        <a href="{{ url_for('index') }}" class="nav-button">
           <i data-lucide="rotate-cw"></i>
           Rotasi
         </a>
@@ -26,7 +26,7 @@
           <i data-lucide="maximize"></i>
           Dilatasi
         </a>
-        <a href="{{ url_for('reflect') }}" class="nav-button">
+        <a href="{{ url_for('reflect') }}" class="nav-button active">
           <i data-lucide="flip-horizontal"></i>
           Refleksi
         </a>
@@ -64,36 +64,32 @@
           />
         </div>
 
-        <div class="rotation-section">
-          <div class="rotation-header">
-            <h2 class="rotation-title">Rotasi Gambar</h2>
-            <i data-lucide="rotate-ccw"></i>
+        <div class="reflection-section">
+          <div class="reflection-header">
+            <h2 class="reflection-title">Refleksi Gambar</h2>
+            <i data-lucide="flip-horizontal"></i>
           </div>
 
-          <div class="slider-container">
-            <label for="rotationSlider">Sudut Rotasi:</label>
-            <span id="rotationValue">0°</span>
-            <input
-              type="range"
-              name="rotation"
-              id="rotationSlider"
-              min="-180"
-              max="180"
-              value="0"
-              class="slider"
-            />
-          </div>
-
-          <div class="angle-buttons">
-            <button type="button" class="angle-button" data-angle="-90">
-              -90°
-            </button>
-            <button type="button" class="angle-button" data-angle="0">
-              0°
-            </button>
-            <button type="button" class="angle-button" data-angle="90">
-              +90°
-            </button>
+          <div class="radio-group">
+            <div>
+              <input
+                type="radio"
+                name="transform"
+                id="horizontal"
+                value="horizontal"
+                checked
+              />
+              <label for="horizontal">Horizontal</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                name="transform"
+                id="vertical"
+                value="vertical"
+              />
+              <label for="vertical">Vertical</label>
+            </div>
           </div>
 
           <div class="action-buttons">
@@ -127,8 +123,6 @@
       const fileInput = document.getElementById('fileInput');
       const canvasOrigin = document.getElementById('canvasOrigin');
       const canvasTransformed = document.getElementById('canvasTransformed');
-      const rotationSlider = document.getElementById('rotationSlider');
-      const rotationValue = document.getElementById('rotationValue');
       const resetButton = document.getElementById('resetButton');
       const downloadButton = document.getElementById('downloadButton');
       const imageContainer = document.querySelector('.image-container');
@@ -150,29 +144,11 @@
         }
       });
 
-      // Update rotation value on slider input
-      rotationSlider.addEventListener('input', (e) => {
-        const angle = e.target.value;
-        rotationValue.textContent = `${angle}°`;
-      });
-
-      // Handle preset angle buttons
-      document.querySelectorAll('.angle-button').forEach((button) => {
-        button.addEventListener('click', () => {
-          const angle = button.dataset.angle;
-          console.log(button.dataset);
-          rotationSlider.value = angle;
-          rotationValue.textContent = `${angle}°`;
-        });
-      });
-
       // Reset handler
       resetButton.addEventListener('click', () => {
         imageContainer.style.display = 'none';
         dropZone.style.display = 'block';
         fileInput.value = '';
-        rotationSlider.value = 0;
-        rotationValue.textContent = '0°';
       });
 
       async function submitHandler(event) {
@@ -184,19 +160,12 @@
         }
 
         const file = fileInput.files[0];
-        const rotationAngle = rotationSlider.value;
-
-        // console.log(file)
-
-        const formData = new FormData();
-        formData.append('image', file);
-        formData.append('angle', rotationAngle);
 
         // Log FormData entries for debugging
         try {
-          const response = await fetch('/rotate', {
+          const response = await fetch('/reflect', {
             method: 'POST',
-            body: formData,
+            body: new FormData(uploadForm),
           });
 
           if (!response.ok) {

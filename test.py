@@ -11,6 +11,9 @@ if __name__ == "__main__":
     image = cv2.imread("image.jpg")
     dilated_image = dilate_image(image, 0.2, 0.2)
     
+    output_path = "image_low.jpg"
+    cv2.imwrite(output_path, dilated_image)
+    
     plt.subplot(1, 2, 1)
     plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
     plt.title("Original Image")
