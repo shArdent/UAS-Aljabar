@@ -116,7 +116,7 @@ def reflect():
             }
             return jsonify(response)
 
-    return render_template('reflect.html')
+    return render_template('index.html')
 
 @app.route('/translate', methods=['GET', 'POST'])
 def translate():
